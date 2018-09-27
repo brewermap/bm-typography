@@ -1,0 +1,54 @@
+
+@function bm-typography-get-global-variable_($style) {
+  @if $style == "headline1" {
+    @return $bm-typography-styles-headline1;
+  } @else if $style == "headline2" {
+    @return $bm-typography-styles-headline2;
+  } @else if $style == "headline3" {
+    @return $bm-typography-styles-headline3;
+  } @else if $style == "headline4" {
+    @return $bm-typography-styles-headline4;
+  } @else if $style == "headline5" {
+    @return $bm-typography-styles-headline5;
+  } @else if $style == "headline6" {
+    @return $bm-typography-styles-headline6;
+  } @else if $style == "subtitle1" {
+    @return $bm-typography-styles-subtitle1;
+  } @else if $style == "subtitle2" {
+    @return $bm-typography-styles-subtitle2;
+  } @else if $style == "body1" {
+    @return $bm-typography-styles-body1;
+  } @else if $style == "body2" {
+    @return $bm-typography-styles-body2;
+  } @else if $style == "caption" {
+    @return $bm-typography-styles-caption;
+  } @else if $style == "button" {
+    @return $bm-typography-styles-button;
+  } @else if $style == "overline" {
+    @return $bm-typography-styles-overline;
+  } @else {
+    @return ();
+  }
+}
+
+@function bm-typography-set-styles_($base-styles, $scale-styles) {
+  @each $style, $style-props in $scale-styles {
+
+    // Merge base properties for all styles.
+    $style-props: map-merge($base-styles, $style-props);
+
+    // Merge global overrides onto each style.
+    @if global_variable_exists(unquote("bm-typography-styles-#{$style}")) {
+      $style-props: map-merge($style-props, bm-typography-get-global-variable_(#{$style}));
+    }
+
+    // Override original styles with new styles.
+    $scale-styles: map-merge($scale-styles, (#{$style}: $style-props));
+  }
+
+  @return $scale-styles;
+}
+
+@function bm-typography-get-letter-spacing_($tracking, $font-size) {
+  @return $tracking / ($font-size * 16) * 1em;
+}

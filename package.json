@@ -1,0 +1,17 @@
+{
+  "name": "bm-typography",
+  "description": "Typography classes, mixins, and variables for Brewer Map Components",
+  "version": "0.1.0",
+  "license": "MIT",
+  "keywords": [
+    "brewer map components",
+    "brewer map",
+    "typography",
+    "font",
+    "mexico"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brewer-map/bm-typography.git"
+  }
+}
